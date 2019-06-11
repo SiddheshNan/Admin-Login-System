@@ -51,7 +51,7 @@ $staffname = $_SESSION['staff_name'];
                         <a class="nav-link" href="controlpanel.php">Control Panel<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../users/user_create.php">Create User</a>
+                        <a class="nav-link" href="user_create.php">Create User</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="user_editor.php">User Management</a>
@@ -75,10 +75,10 @@ $staffname = $_SESSION['staff_name'];
             <br>
     <div class="container">
         <div class="row">
-            <div class="col-12"><a href="../users/user_create.php" class="btn1 btn-1 btn-1c" role="button">Create User</a></div>
+            <div class="col-12"><a href="user_create.php" class="btn1 btn-1 btn-1c" role="button">Create User</a></div>
             <div class="col-12"><a href="user_editor.php" class="btn1 btn-3 btn-3c" role="button">User Management</a></div>
-            <div class="col-12"> <a href="../users/user_login.php" class="btn1 btn-2 btn-2c" role="button">Login User</a></div>
-            <div class="col-12"><a href="staff_logout.php" class="btn1 btn-4 btn-4c" role="button">Logout Staff</a></div>
+            <div class="col-12"> <a href="../users/user_login.php" class="btn1 btn-2 btn-2c" role="button">Login as User</a></div>
+            <div class="col-12"><a href="admin_logout.php" class="btn1 btn-4 btn-4c" role="button">Logout Admin</a></div>
         </div>
     </div>
 </div>

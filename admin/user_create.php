@@ -12,14 +12,14 @@ if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     $_SESSION['message'] = 'error';
-    header("location: ../index.php");
+    header("location: ./index.php");
     exit;
 }
 
 
 // Include config file
-require_once "user_config.php";
- 
+require_once "admin_config.php";
+
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
@@ -29,26 +29,26 @@ $staffname = $_SESSION['staff_name'];
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = ?";
-        
+
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
+
             // Set parameters
             $param_username = trim($_POST["username"]);
-            
+
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 /* store result */
                 mysqli_stmt_store_result($stmt);
-                
+
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     $username_err = "This username is already taken.";
                 } else{
@@ -58,23 +58,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
-         
+
         // Close statement
         mysqli_stmt_close($stmt);
     }
-    
+
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter a password.";     
+        $password_err = "Please enter a password.";
     } elseif(strlen(trim($_POST["password"])) < 6){
         $password_err = "Password must have atleast 6 characters.";
     } else{
         $password = trim($_POST["password"]);
     }
-    
+
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";     
+        $confirm_password_err = "Please confirm password.";
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
@@ -93,14 +93,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-        
+
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password, url, staff_name) VALUES (?, ?, ?, ?)";
-         
+
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_url , $staffname);
-            
+
             // Set parameters
             $param_username = $username;
             $param_url = $url;
@@ -117,11 +117,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Something went wrong. Please try again later.";
             }
         }
-         
+
         // Close statement
         mysqli_stmt_close($stmt);
     }
-    
+
     // Close connection
     mysqli_close($link);
 }
@@ -133,16 +133,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <meta charset="UTF-8">
     <title>AimTechsWiFi - Create Account</title>
-    <link rel="stylesheet" href="../common/bootstrap.css">
-    <link rel="icon" href="../common/cpu.png">
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <link rel="icon" href="../assets/cpu.png">
     <style type="text/css">
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
         .row{margin-left: 37%;}
         .btn-default{font-size:17px;color:rgba(108,88,179,.75);letter-spacing:0;line-height:26px;border:2px solid rgba(108,89,179,.75);border-radius:40px;background:0 0;transition:all .3s ease 0s}.btn-default:hover{color:#FFF;background:rgba(108,88,179,.75);border:2px solid rgba(108,89,179,.75)}
     </style>
-    <script src="../common/jquery.min.js"></script>
-    <script src="../common/bootstrap.min.js"></script>
+    <script src="../assets/jquery.min.js"></script>
+    <script src="../assets/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -160,20 +160,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <a class="nav-link">Hello, <?php echo "$staffname"; ?> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../staff/controlpanel.php">Control Panel</a>
+                    <a class="nav-link" href="controlpanel.php">Control Panel</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../users/user_create.php">Create User<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="user_create.php">Create User<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../staff/user_editor.php">User Management</a>
+                    <a class="nav-link" href="user_editor.php">User Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../users/user_login.php">User Login</a>
+                    <a class="nav-link" href="../users/user_login.php">Login as User</a>
                 </li>
                 <li>&nbsp;&nbsp;&nbsp;</li>
                 <li>
-                    <a href="../staff/staff_logout.php"> <button class="btn btn-danger">Logout</button></a>
+                    <a href="admin_logout.php"> <button class="btn btn-danger">Logout</button></a>
                 </li>
             </ul>
 
