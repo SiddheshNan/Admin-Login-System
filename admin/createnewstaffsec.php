@@ -16,7 +16,7 @@ if (!$validated) {
 ?>
 <?php
 // Include config file
-require_once "staff_config.php";
+require_once "admin_config.php";
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
@@ -94,7 +94,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: ../index.php");
+                header("location: ./index.php");
+                exit;
             } else{
                 echo "Something went wrong. Please try again later.";
             }

@@ -156,8 +156,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
     </div>
 </div>
-<script src="../common/jquery.min.js"></script>
-<script src="../common/bootstrap.min.js"></script>
+<script src="../assets/jquery.min.js"></script>
+<script src="../assets/bootstrap.min.js"></script>
 <script src="../assets/js/main.js"></script>
 </body>
 </html>
