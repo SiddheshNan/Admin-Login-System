@@ -127,8 +127,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="wrap-login100">
             <form class="login100-form validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 					<span class="login100-form-title p-b-26">
-                        <h2>AimTechs</h2>
-                        <h3>Admin Login</h3>
+                        <h2>ADMIN LOGIN</h2>
+                        <h3>PLEASE LOGIN</h3>
 					</span>
                 <div class="wrap-input100 validate-input" data-validate = "Invalid Username">
                     <input class="input100" type="text" name="username">
